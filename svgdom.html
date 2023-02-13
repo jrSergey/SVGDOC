@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SVG DOC</title>
+</head>
+<body>
+    <!-- Поле ввода текста и кнопка -->
+    <embed id="svgDoc" src="banner.svg" type="image/svg+xml" width="500" height="70">
+    <br>
+    <br>
+    <input id="htmTxt" size="50">
+    <br>
+    <br>
+    <button id="htmBtn">Отправить в документ SVG</button>
+
+    <script>
+        //Создание ссылки на документ формата SVG и элементы в обоих документах
+        function loadSVG( ) 
+        {
+            const svgDoc = document.getElementById( 'svgDoc' ).getSVGDocument( )
+            const svgTxt = svgDoc.getElementById( 'svgTxt' )
+            const svgBtn = svgDoc.getElementById( 'svgBtn' )
+            const htmTxt = document.getElementById( 'htmTxt' )
+            const htmBtn = document.getElementById( 'htmBtn' )
+            
+            //Операторы, чтобы привязать обработчик для кнопки HTML
+            htmBtn.addEventListener( 'click', function( ) 
+            { 
+                svgTxt.lastChild.replaceWith( htmTxt.value )
+                htmTxt.value = ' ' 
+            } )
+            
+            //Операторы, чтобы указать функцию обработчика событий для круга SVG
+            svgBtn.addEventListener( 'click', function( ) 
+            {
+                htmTxt.value = svgTxt.lastChild.wholeText
+                svgTxt.lastChild.replaceWith( 'SVG Text' )
+            } )
+        } 
+        onload = loadSVG
+    </script>
+</body>
+</html>
